@@ -31,6 +31,7 @@
   #include <sys/socket.h>
   #include <netdb.h>
   #include <unistd.h>
+  typedef int SOCKET;
 #else
   #include <malloc.h>
   #include <winsock.h>

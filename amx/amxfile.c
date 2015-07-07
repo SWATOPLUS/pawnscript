@@ -102,7 +102,8 @@
   #endif
 #endif
 #if !(defined __WIN32__ || defined _WIN32 || defined WIN32)
-  #define _stat(n,b)  stat(n,b)
+  //#define _stat(n,b)  stat(n,b) //KOCTb1/|b
+  #define _stat  stat
 #endif
 #if !defined S_ISDIR
   #define S_ISDIR(mode) (((mode) & _S_IFDIR) != 0)

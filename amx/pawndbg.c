@@ -1022,6 +1022,7 @@ static int remote_rs232(const char *port,int baud)
 
   /* handshake, send token and wait for a reply */
   sync_found=0;
+  unsigned long size;
   do {
     #if defined __WIN32__
       WriteFile(hCom,"\xa1",1,&size,NULL);
@@ -1106,7 +1107,11 @@ static int remote_wait_rs232(AMX *amx, long retries)
           #endif
         } /* if */
         if (size==0 && remote_pendingsize==0 && retries>0) {
-          Sleep(50);
+          #if defined __WIN32__
+            Sleep(50);
+          #else
+            usleep(50*1000);
+          #endif
           retries--;
         }
       } while (size==0 && remote_pendingsize==0 && retries!=0);
